@@ -1,4 +1,4 @@
-name: Run HTML Tests
+name: Run HTML Tests and Lint
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v3
 
@@ -15,5 +16,11 @@ jobs:
       with:
         node-version: '20'
 
-    - run: npm install
-    - run: npm test
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Jest Tests
+      run: npm test
+
+    - name: Run HTMLHint
+      run: npm run lint
